@@ -1,0 +1,1 @@
+docker build -t rafabene/java-container:openjdk -f Dockerfile.openjdk .
