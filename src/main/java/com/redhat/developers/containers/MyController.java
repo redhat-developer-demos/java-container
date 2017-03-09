@@ -36,13 +36,12 @@ public class MyController {
 	@RequestMapping(method = RequestMethod.GET, value = "/memory", produces = "text/plain")
 	public String memory() {
 		System.out.println("Starting to allocate memory...");
+		Runtime rt = Runtime.getRuntime();
 		StringBuilder sb = new StringBuilder();
-		long maxMemory = 1000;
+		long maxMemory = rt.maxMemory();
 		long usedMemory = 0;
 		while (((float) usedMemory / maxMemory) < 0.80) {
 			sb.append(System.nanoTime() + sb.toString());
-			Runtime rt = Runtime.getRuntime();
-			maxMemory = rt.maxMemory();
 			usedMemory = rt.totalMemory();
 		}
 		String msg = "Allocated more than 80% (" + humanReadableByteCount(usedMemory, false) + ") of the max allowed JVM memory size ("
