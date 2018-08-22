@@ -40,14 +40,19 @@ public class MyController {
 		StringBuilder sb = new StringBuilder();
 		long maxMemory = rt.maxMemory();
 		long usedMemory = 0;
-		while (((float) usedMemory / maxMemory) < 0.80) {
-			sb.append(System.nanoTime() + sb.toString());
-			usedMemory = rt.totalMemory();
-		}
-		String msg = "Allocated more than 80% (" + humanReadableByteCount(usedMemory, false) + ") of the max allowed JVM memory size ("
-				+ humanReadableByteCount(maxMemory, false) + ")";
-		System.out.println(msg);
-		return msg;
+    try{
+  		while (((float) usedMemory / maxMemory) < 0.80) {
+  			sb.append(System.nanoTime() + sb.toString());
+  			usedMemory = rt.totalMemory();
+  		}
+    } catch (OutOfMemoryError e){
+      // Do nothing as we expect it to happen
+    } finally{
+  		String msg = "Allocated more than 80% (" + humanReadableByteCount(usedMemory, false) + ") of the max allowed JVM memory size ("
+  				+ humanReadableByteCount(maxMemory, false) + ")";
+  		System.out.println(msg);
+  		return msg;
+    }
 	}
 
 	public static String humanReadableByteCount(long bytes, boolean si) {
