@@ -1,6 +1,8 @@
 # java-container
 Demo project for Java Applications running inside containers - Using Spring Boot
 
+This application was used for the following blog post: https://developers.redhat.com/blog/2017/03/14/java-inside-docker/
+
 
 Build and Deploy java-container locally
 ---------------------------------------
