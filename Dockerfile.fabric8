@@ -1,7 +1,8 @@
-FROM fabric8/java-jboss-openjdk8-jdk:1.4.0
+FROM fabric8/java-alpine-openjdk8-jdk:1.6.2
 
 ENV JAVA_APP_JAR java-container.jar
 ENV AB_OFF true
+ENV JAVA_MAJOR_VERSION 7
 
 EXPOSE 8080
 
