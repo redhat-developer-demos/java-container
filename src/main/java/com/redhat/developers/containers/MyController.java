@@ -33,6 +33,17 @@ public class MyController {
 	}
 
 	@CrossOrigin
+	@RequestMapping(method = RequestMethod.GET, value = "/cpu", produces = "text/plain")
+	public String cpu() {
+		Runtime runtime = Runtime.getRuntime();
+
+		int processors = runtime.availableProcessors();
+		long maxMemory = runtime.maxMemory();
+
+		return String.format("Number of processors: %d\nMax memory: %d bytes\n", processors, maxMemory);
+	}
+
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.GET, value = "/memory", produces = "text/plain")
 	public String memory() {
 		System.out.println("Starting to allocate memory...");
